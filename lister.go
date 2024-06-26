@@ -67,6 +67,8 @@ type Lister interface {
 	Pages() uint
 	// SQLSortOrder get sql order and limit command as string
 	SQLSortOrder() string
+	// PQSortOrder get sql order and limit command as string for postgresql
+	PQSortOrder() string
 	// Response get response for json, contains pagination information and meta data
 	Response() map[string]any
 	// ResponseWithData return response with data

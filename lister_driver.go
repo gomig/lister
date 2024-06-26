@@ -212,6 +212,10 @@ func (ld lDriver) SQLSortOrder() string {
 	return fmt.Sprintf(" ORDER BY %s %s LIMIT %d, %d", ld.sort, ld.order, ld.from-1, ld.limit)
 }
 
+func (ld lDriver) PQSortOrder() string {
+	return fmt.Sprintf(" ORDER BY %s %s LIMIT %d OFFSET %d", ld.sort, ld.order, ld.limit, ld.from-1)
+}
+
 func (ld lDriver) Response() map[string]any {
 	res := make(map[string]any)
 	for k, v := range ld.meta {

@@ -311,6 +311,14 @@ Get sql order and limit command as string.
 SQLSortOrder() string
 ```
 
+### PQSortOrder
+
+Get sql order and limit command as string for postgresql.
+
+```go
+PQSortOrder() string
+```
+
 ### Response
 
 Get response for json, contains pagination information and meta data.
