@@ -200,6 +200,14 @@ func (ld lDriver) From() uint64 {
 	return ld.from
 }
 
+func (ld lDriver) sqlFrom() uint64 {
+	if ld.from == 0 {
+		return 0
+	} else {
+		return ld.from - 1
+	}
+}
+
 func (ld lDriver) To() uint64 {
 	return ld.to
 }
@@ -209,11 +217,11 @@ func (ld lDriver) Pages() uint {
 }
 
 func (ld lDriver) SQLSortOrder() string {
-	return fmt.Sprintf(" ORDER BY %s %s LIMIT %d, %d", ld.sort, ld.order, ld.from-1, ld.limit)
+	return fmt.Sprintf(" ORDER BY %s %s LIMIT %d, %d", ld.sort, ld.order, ld.sqlFrom(), ld.limit)
 }
 
 func (ld lDriver) PQSortOrder() string {
-	return fmt.Sprintf(" ORDER BY %s %s LIMIT %d OFFSET %d", ld.sort, ld.order, ld.limit, ld.from-1)
+	return fmt.Sprintf(" ORDER BY %s %s LIMIT %d OFFSET %d", ld.sort, ld.order, ld.limit, ld.sqlFrom())
 }
 
 func (ld lDriver) Response() map[string]any {
