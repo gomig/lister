@@ -221,7 +221,7 @@ func (ld lDriver) SQLSortOrder() string {
 }
 
 func (ld lDriver) PQSortOrder() string {
-	return fmt.Sprintf(" ORDER BY %s %s LIMIT %d OFFSET %d", ld.sort, ld.order, ld.limit, ld.sqlFrom())
+	return fmt.Sprintf(" ORDER BY %s %s LIMIT %d OFFSET %d", ld.sort, ld.order, ld.limit, ld.From())
 }
 
 func (ld lDriver) Response() map[string]any {
