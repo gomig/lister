@@ -16,7 +16,7 @@ Request resolver is a function that parse lister fields from request (string, fo
 
 **JsonStringResolver:** this resolver parse lister fields from json string.
 
-**JsonMapperResolver:** this resolver parse lister fields from json string with rename and add prefix to sort field.
+**JsonMapperResolver:** this resolver parse lister fields from json string and rename sort fields from passed map.
 
 **FiberFormResolver:** this resolver parse lister fields from goFiber request context (json, form and xml supported).
 

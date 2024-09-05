@@ -34,8 +34,7 @@ func TestRecordResolver(t *testing.T) {
 	if err := lister.JsonMapperResolver(
 		lister2,
 		`{"sort": "client"}`,
-		map[string]string{"client": "name"},
-		map[string][]string{"clients": {"name"}},
+		map[string]string{"client": "clients.name"},
 	); err != nil {
 		t.Fatal(err.Error())
 	} else if lister2.Sort() != "clients.name" {
