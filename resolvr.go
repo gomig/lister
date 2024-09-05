@@ -60,6 +60,33 @@ func JsonStringResolver(lister Lister, data any) error {
 	return utils.TaggedError([]string{"JsonStringResolver"}, "data is not valid!")
 }
 
+// JsonMapperResolver parse parameters from json string and map sort fields to config
+func JsonMapperResolver(lister Lister, data any, replacements map[string]string, prefixes map[string][]string) error {
+	normalize := func(sort string) string {
+		if v, ok := replacements[sort]; ok {
+			sort = v
+		}
+
+		for prefix, fields := range prefixes {
+			if utils.Contains(fields, sort) {
+				return prefix + "." + sort
+			}
+		}
+		return sort
+	}
+
+	if qs, ok := data.(string); ok {
+		record := ListerRequest{}
+		if err := json.Unmarshal([]byte(qs), &record); err == nil {
+			record.Sort = normalize(record.Sort)
+			return RecordResolver(lister, record)
+		} else {
+			return utils.TaggedError([]string{"JsonStringResolver"}, err.Error())
+		}
+	}
+	return utils.TaggedError([]string{"JsonStringResolver"}, "data is not valid!")
+}
+
 // FiberFormResolver parse parameters from fiber context
 func FiberFormResolver(lister Lister, data any) error {
 	if ctx, ok := data.(*fiber.Ctx); ok {
